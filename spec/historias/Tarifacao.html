@@ -1,0 +1,104 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Tarifação de Transações</title>
+</head>
+
+<body>
+<h2>Tarifação de Transações</h2>
+
+<h3>Descrição:</h3>
+<ul>
+	<li>Como Gerente de Conta, é preciso tarifar as transações financeiras de uma conta 
+	    conforme o tipo da cesta de serviços da conta e gerar o lançamento de débito 
+	    correspondente ao valor da tarifa cobrada dessa transação.
+	    TODAS as tarifações são por dia útil contábil.
+	</li>
+</ul>
+
+<h3>Restrição:</h3>
+<ul>
+	<li>Deve haver conta válida para a realização de qualquer transação, ou seja, conta cadastrada.</li>
+    <li>Os tipos de cestas de serviços da conta são:</li>
+		<ul>
+	    	<li>Básica</li>
+	    	<li>Especial</li>
+	    </ul>
+	<li>Os tipos de tarifações em que uma transação da conta pode ser tarifada são:</li>
+		<ul>
+	    	<li>Tarifação por Valor da Transação</li>
+	    		<ul>
+	    			<li>Para transações maiores ou igual a 3.000,00</li>
+	    		</ul>
+	    	<li>Tarifação por Cesta de Serviços</li>
+	    	    <ul>
+	    	    	<li>Para Cesta de Serviço Básica</li>
+	    	    		<ul>
+	    	    			<li>Saque - Quantidade Contratada: 2 por dia - Tarifação por Excedente: 1,00</li>
+	    	    			<li>Transferência entre Contas - Quantidade Contratada: 1 por dia - Tarifação por Excedente: 1,00</li>
+	    	    			<li>DOC/TED entre Bancos - Quantidade Contratada: 1 por dia - Tarifação por Excedente: 7,00</li>
+	    	    		</ul>
+	    	    	<li>Para Cesta de Serviço Especial</li>
+	    	    		<ul>
+	    	    			<li>Saque - Quantidade Contratada: 3 por dia - Tarifação por Excedente: 0,50</li>
+	    	    			<li>Transferência entre Contas - Quantidade Contratada: 2 por dia - Tarifação por Excedente: 0,50</li>
+	    	    			<li>DOC/TED entre Bancos - Quantidade Contratada: 1 por dia - Tarifação por Excedente: 5,50</li>
+	    	    		</ul>
+	    	    </ul>
+	    	<li>Tarifação por Quantidade de Transações</li>
+	    		<ul>
+	    	    	<li>Para Cesta de Serviço Básica</li>
+	    	    		<ul>
+	    	    			<li>Quantidade Contratada: 2 por dia - Tarifação por Excedente: 2,00</li>
+	    	    		</ul>
+	    	    	<li>Para Cesta de Serviço Especial</li>
+	    	    		<ul>
+	    	    			<li>Quantidade Contratada: 4 por dia - Tarifação por Excedente: 1,50</li>
+	    	    		</ul>
+	    	    </ul>
+	    	<li>Sem Tarifação</li>
+	    </ul>
+</ul>
+		
+<h3>Critérios de Aceitação:</h3>
+<ul>
+	<li>Quando a tarifação for por Valor da Transação:</li>
+		<ul>
+	    	<li>Para conta Básica a tarifa cobrada será de 0,15% do valor da transação.</li>
+	    	<li>Para conta Especial a tarifa cobrada será de 0,10% do valor da transação.</li>
+	    </ul>
+	<li>Quando a tarifação for por Cesta de Serviços:</li>
+		<ul>
+	    	<li>Ver Cesta de Serviços Contratada.</li>
+	    </ul>
+	<li>Quando a tarifação for por Quantidade de Transações:</li>
+		<ul>
+	    	<li>Ver Quantidade de Transações Contratadas por dia.</li>
+	    </ul>
+	<li>Quando a tarifação for por Sem Tarifação:</li>
+		<ul>
+	    	<li>A transação não atendeu nenhum critério de tarifação, portanto não é tarifada.</li>
+	    </ul>
+	<li>Quando realizada a tarifação da transação, o saldo deve ser sensibilizado debitando o valor da tarifa calculada.</li>
+	<li>Quando realizado a tarifação da transação, o lançamento de débito referente a transação deve ser gerado.</li>
+		<ul>
+	    	<li>A data do lançamento deve ser a data da realização da transação.</li>
+	    	<li>O tipo de lançamento é de débito.</li>
+	    	<li>A descrição do lançamento é "Tarifação - 'Tipo da Transação'" Ex: "Tarifação - Saque".</li>
+	    	<li>O valor do lançamento é o valor da tarifa cobrada.</li>
+	    </ul>
+</ul>
+
+<h3>Observação:</h3>
+<ul>
+	<li>A sequência de tarifação será na seguinte ordem:</li>
+		<ul>
+			<li>Tarifação por Valor da Transação</li>
+			<li>Tarifação por Cesta de Serviços</li>
+			<li>Tarifação por Quantidade de Transações</li>
+			<li>Sem Tarifação</li>
+		</ul>
+</ul>
+
+</body>
+</html>

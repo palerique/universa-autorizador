@@ -1,0 +1,108 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Realiza DOC/TED</title>
+</head>
+
+<body>
+	<h2>Realiza DOC/TED</h2>
+
+	<h3>Descrição:</h3>
+	<ul>
+		<li>Como Gerente de Conta, é preciso realizar um DOC (Documento de Crédito) com compensação 
+			no final do dia ou uma TED (Transferência Eletrônica Disponível) com compensação automática, para realizar
+			transferências interbancárias, isso é, envolvendo dois bancos distintos e levando em consideração o 
+			saldo disponível e gerando o lançamento de débito correspondente a essa transação.</li>
+	</ul>
+
+	<h3>Restrição:</h3>
+	<ul>
+		<li><a href="RealizaTransacao.html">Ver restrições de uma transação.</a></li>
+		<li>Deve haver saldo suficiente para a efetuação do DOC/TED, não é permitido que o saldo vire, ou seja, fique negativo.</li>
+		<li>O valor correspondente ao DOC/TED deve ser maior que R$ 10,00.</li>
+		<li>Quando o valor correspondente a transação for menor que R$ 3.000,00 reais.</li>
+		<ul>
+			<li>A transação é caracterizada como um DOC, devendo a mesma ser
+				gravada no arquivo de DOCs que será processado nas rotinas batch
+				nortunas.</li>
+		</ul>
+		<li>Quando o valor correspondente a transação for maior ou igual a R$ 3.000,00 reais.</li>
+		<ul>
+			<li>A transação é caracterizada como uma TED.</li>
+			<li>Notifica o SPB - Sistema de Pagamentos Brasileiro sobre a TED realizada.</li>
+		</ul>
+	</ul>
+
+	<h3>Critérios de Aceitação:</h3>
+	<ul>
+		<li><a href="RealizaTransacao.html">Ver critérios de aceitação de uma transação.</a></li>
+		<li>Quando realizado o DOC/TED, o saldo deve ser sensibilizado debitando o valor informado na transação mais a tarifação, caso haja.</li>
+		<li>Quando realizado o DOC/TED, o lançamento de débito referente a transação deve ser gerado.</li>
+		<ul>
+			<li>A data do lançamento deve ser a data da realização da transação.</li>
+			<li>O tipo de lançamento é de débito.</li>
+			<li>A descrição do lançamento é "DOC-C ou DOC-D para a conta
+				BBB:AAAA:CCCCCCC" ou "TED-C ou TED-D para para a conta
+				BBB:AAAA:CCCCCCC", conforme sua categoria e tipo.</li>
+			<li>O valor do lançamento é o valor do DOC/TED.</li>
+		</ul>
+	</ul>
+
+	<h3>Observação:</h3>
+	<ul>
+		<li>Dados informados ao SPB para TED:
+			<ul>
+				<li>identificação da transação de origem</li>
+				<li>tipo da TED {C - Entre contas de mesmos titulares ou D - Entre contas de titulares diferentes}</li>
+				<li>valor da transação</li>
+				<li>número do banco de origem</li>
+				<li>número da agência de origem</li>
+				<li>número da conta de origem</li>
+				<li>cpf do titular da conta de origem</li>
+				<li>número do banco favorecido</li>
+				<li>número da agência favorecida</li>
+				<li>número da conta favorecida</li>
+				<li>cpf do titular da conta favorecida</li>
+			</ul>
+		</li>
+		<br>
+		<li>Códigos de retorno do SPB para o registro de TED:
+			<ul>
+				<li>0 - TED realizada com sucesso</li>
+				<li>1 - Dados insuficientes para registro da TED.</li>
+				<li>2 - CPF do titular da conta favorecida inválido.</li>
+				<li>3 - Tipo da TED inválida.</li>
+				<li>4 - Valor menor que o permitido para TED.</li>
+			</ul>
+		</li>
+		<br>
+		<li>Formato do nome do arquivo de DOC 'DOCBBBYYYYMMDD', onde:
+			<ul>
+				<li>DOC é o prefixo do arquivo</li>
+				<li>BBB é o código do Banco Universa</li>
+				<li>YYYY é o ano</li>
+				<li>MM é o mês</li>
+				<li>DD é o dia, pois é um arquivo de DOC por dia útil bancário</li>
+			</ul>
+		</li>
+		<br>
+		<li>Dados do registro de DOC (Registro Posicional, com delimitador "|") :
+			<ul>
+				<li>X|111|2222|3333333|4444,44|555|6666|7777777|88888888888|b7899e18-d4bc-42f2-acac-44e9f27befe5
+				<p>
+				<li>X - tipo da TED {C - Entre contas de diferentes titulares
+					ou D - Entre contas do mesmo titular}</li>
+				<li>111 - número do banco de origem</li>
+				<li>2222 - número da agência de origem</li>
+				<li>3333333 - número da conta de origem</li>
+				<li>4444,44 - valor da transação</li>
+				<li>555 - número do banco favorecido</li>
+				<li>6666 - número da agência favorecida</li>
+				<li>7777777 - número da conta favorecida</li>
+				<li>88888888888 - cpf do titular da conta favorecida</li>
+				<li>tamanho livre - identificação da transação de origem</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

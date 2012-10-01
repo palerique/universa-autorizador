@@ -1,0 +1,48 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Realiza Transação</title>
+</head>
+
+<body>
+<h2>Realiza Transação</h2>
+
+<h3>Descrição:</h3>
+<ul>
+	<li>Como Gerente de Conta, é preciso realizar transações financeiras, como depósito, saque, 
+		transferências, investimento em fundos, DOC/TED. Transação é toda a ação que sensibiliza
+		a conta.
+	</li>
+</ul>
+
+<h3>Restrição:</h3>
+<ul>
+	<li>Deve haver conta válida para a realização de qualquer transação, ou seja, conta cadastrada.</li>
+	<li>O valor correspondente a transação deve ser maior que ZERO.</li>
+	<li>Quando o valor correspondente a transação for maior ou igual a 3.000,00 reais.</li>
+		<ul>
+	    	<li>Notifica o SPB - Sistema de Pagamentos Brasileiro sobre a transação realizada, informando os dados de tipo do 
+	    		transação {1 - Débito, 2 - Crédito}, banco, agência, conta, cpf do titular da conta, valor da transação, 
+	    		identificador da transação de origem.</li>
+	    </ul>
+</ul>
+		
+<h3>Critérios de Aceitação:</h3>
+<ul>
+	<li>Quando realizada a transação, a mesma poderá ser tarifada, conforme regras de tarifação.</li>
+	<li>Quando realizada a transação, a mesma será gravada.</li>    
+</ul>
+
+<h3>Observação:</h3>
+<ul>
+	<li>Códigos de retorno do SPB para o registro de transação:
+		<ul>
+			<li>0 - Notificação realizada com sucesso</li>
+			<li>1 - Dados insuficientes para notificação da transação.</li>
+			<li>2 - CPF do titular da conta inválido.</li>
+		</ul>
+	</li>
+</ul>
+
+</body>
+</html>

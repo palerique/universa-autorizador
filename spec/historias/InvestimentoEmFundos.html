@@ -1,0 +1,68 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Investimento em Fundos</title>
+</head>
+
+<body>
+<h2>Investimento em Fundos</h2>
+
+<h3>Descrição:</h3>
+<ul>
+	<li>Como Gerente de Conta, é preciso investir "aplicar" um valor disponível na conta em um 
+	    fundo de investimento com diferentes perfis de rentabilidade conforme o tipo do fundo e 
+		gerar o lançamento de crédito correspondente a rentabilidade dessa transação.
+	</li>
+</ul>
+
+<h3>Restrição:</h3>
+<ul>
+	<li><a href="RealizaTransacao.html">Ver restrições de uma transação.</a></li>
+	<li>Deve haver saldo suficiente para a realização da aplicação no fundo, não é permitido que o saldo vire, ou seja, fique negativo.</li>
+    <li>Os tipos de fundo disponíveis para aplicação são:</li>
+		<ul>
+	    	<li>Conservador</li>
+	    	<li>Moderado</li>
+	    	<li>Agressivo</li>
+	    </ul>
+</ul>
+		
+<h3>Critérios de Aceitação:</h3>
+<ul>
+	<li>Independente do tipo do fundo escolhido para aplicação, o titular da conta recebe apenas 75% da rentabilidade do investimento, pois 25% é imposto.</li>
+	<li>Quando a aplicação for em um fundo Conservador:</li>
+		<ul>
+	    	<li>A rentabilidade bruta será sempre 0.8% do valor investido.</li>
+	    </ul>
+	<li>Quando a aplicação for em um fundo Moderado:</li>
+		<ul>
+	    	<li>A rentabilidade bruta tem 50% de chances de ser 0.6% do valor investido ou;</li>
+	    	<li>A rentabilidade bruta tem 50% de chances de ser 1.5% do valor investido.</li>
+	    </ul>
+	<li>Quando a aplicação for em um fundo Agressivo:</li>
+		<ul>
+	    	<li>A rentabilidade bruta tem 50% de chances de ser 0.4% do valor investido ou;</li>
+	    	<li>A rentabilidade bruta tem 30% de chances de ser 1.2% do valor investido ou;</li>
+	    	<li>A rentabilidade bruta tem 20% de chances de ser 2.0% do valor investido.</li>
+	    </ul>        
+	<li>Quando realizada a aplicação no fundo, o saldo deve ser sensibilizado creditando a rentabilidade.</li>
+	<li>Quando realizado a aplicação no fundo, o lançamento de crédito referente a transação deve ser gerado.</li>
+		<ul>
+	    	<li>A data do lançamento deve ser a data da realização da transação.</li>
+	    	<li>O tipo de lançamento é de crédito.</li>
+	    	<li>A descrição do lançamento é "Investimento em Fundo".</li>
+	    	<li>O valor do lançamento é a rentabilidade da aplicação.</li>
+	    </ul>
+	<li><a href="RealizaTransacao.html">Ver critérios de aceitação de uma transação.</a></li>
+</ul>
+
+<h3>Observação:</h3>
+<ul>
+	<li>Para verificar se a chance é maior que 40%, por exemplo, use:</li>
+	<ul>
+		<li>boolean chance = Math.random() > 0.40;</li>
+	</ul>
+</ul>
+
+</body>
+</html>
