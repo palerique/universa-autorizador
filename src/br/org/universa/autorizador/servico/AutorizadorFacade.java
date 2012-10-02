@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.org.universa.autorizador.negocio.conta.Conta;
+import br.org.universa.autorizador.negocio.conta.ContaMediator;
 import br.org.universa.autorizador.negocio.transacao.Transacao;
 
 public class AutorizadorFacade {
@@ -28,8 +29,7 @@ public class AutorizadorFacade {
 	}
 
 	public Conta consultaConta(Integer agencia, Integer numero) {
-		// TODO Auto-generated method stub
-		return null;
+		return ContaMediator.get().consultaConta(agencia, numero);
 	}
 
 }
