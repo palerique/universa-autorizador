@@ -25,7 +25,7 @@ public class ContaMediator {
 					Mensagens.NAO_EXISTE_CONTA_PARA_AGENCIA_NUMERO);
 		}
 
-		return null;
+		return conta;
 	}
 
 }
