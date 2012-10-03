@@ -3,9 +3,12 @@ package br.org.universa.autorizador.servico;
 import java.util.Date;
 import java.util.List;
 
+import br.org.universa.autorizador.negocio.autorizacao.Autorizacao;
 import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
+import br.org.universa.autorizador.negocio.transacao.AbstractTransacaoMediator;
 import br.org.universa.autorizador.negocio.transacao.Transacao;
+import br.org.universa.autorizador.negocio.transacao.TrasancaoFactory;
 
 public class AutorizadorFacade {
 
@@ -30,6 +33,14 @@ public class AutorizadorFacade {
 
 	public Conta consultaConta(Integer agencia, Integer numero) {
 		return ContaMediator.get().consultaConta(agencia, numero);
+	}
+
+	public Autorizacao executa(Transacao transacao) {
+
+		AbstractTransacaoMediator transacaoMediator = TrasancaoFactory.get()
+				.cria(transacao);
+
+		return transacaoMediator.executa(transacao);
 	}
 
 }
