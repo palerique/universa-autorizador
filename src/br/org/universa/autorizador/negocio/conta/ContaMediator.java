@@ -28,4 +28,9 @@ public class ContaMediator {
 		return conta;
 	}
 
+	public void atualiza(Conta conta) {
+		// TODO algum comportamento;
+		ContaDAO.get().atualiza(conta);
+	}
+
 }
