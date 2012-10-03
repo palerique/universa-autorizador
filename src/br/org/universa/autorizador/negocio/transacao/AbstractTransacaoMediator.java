@@ -10,7 +10,7 @@ public abstract class AbstractTransacaoMediator {
 		Autorizacao autorizacao = new Autorizacao();
 		autorizacao.setEstado(EstadoDaAutorizacao.AUTORIZADA);
 
-		// TODO Irá executar várias coisas comúns;
+		// TODO Irá executar várias coisas comuns;
 		try {
 			executaRegrasEspecificas(transacao);
 		} catch (Exception e) {
