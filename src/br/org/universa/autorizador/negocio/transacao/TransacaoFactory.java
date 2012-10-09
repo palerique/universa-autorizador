@@ -3,18 +3,18 @@ package br.org.universa.autorizador.negocio.transacao;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TrasancaoFactory {
+public class TransacaoFactory {
 
-	private static TrasancaoFactory INSTANCIA;
+	private static TransacaoFactory INSTANCIA;
 
-	private TrasancaoFactory() {
+	private TransacaoFactory() {
 		// Construtor privado
 	}
 
-	public static TrasancaoFactory get() {
+	public static TransacaoFactory get() {
 
 		if (INSTANCIA == null) {
-			INSTANCIA = new TrasancaoFactory();
+			INSTANCIA = new TransacaoFactory();
 		}
 		return INSTANCIA;
 	}

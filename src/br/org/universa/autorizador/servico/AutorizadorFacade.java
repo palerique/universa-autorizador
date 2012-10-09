@@ -8,7 +8,7 @@ import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
 import br.org.universa.autorizador.negocio.transacao.AbstractTransacaoMediator;
 import br.org.universa.autorizador.negocio.transacao.Transacao;
-import br.org.universa.autorizador.negocio.transacao.TrasancaoFactory;
+import br.org.universa.autorizador.negocio.transacao.TransacaoFactory;
 
 public class AutorizadorFacade {
 
@@ -37,7 +37,7 @@ public class AutorizadorFacade {
 
 	public Autorizacao executa(Transacao transacao) {
 
-		AbstractTransacaoMediator transacaoMediator = TrasancaoFactory.get()
+		AbstractTransacaoMediator transacaoMediator = TransacaoFactory.get()
 				.cria(transacao);
 
 		return transacaoMediator.executa(transacao);
