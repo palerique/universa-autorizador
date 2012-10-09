@@ -3,7 +3,7 @@ package br.org.universa.autorizador.negocio.transacao;
 import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
 
-public class TransacaoDeDeposito extends AbstractTransacaoMediator {
+public class TransacaoDeDepositoMediator extends AbstractTransacaoMediator {
 
 	@Override
 	protected void executaRegrasEspecificas(Transacao transacao) {
