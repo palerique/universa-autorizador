@@ -753,6 +753,7 @@ public class AbstractTransacaoMediatorTest {
 					transacoes.get(0).getCanalDeAtendimento().getChave());
 			Assert.assertEquals(99.99, transacoes.get(0).getValor());
 		} catch (Exception e) {
+			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
 	}

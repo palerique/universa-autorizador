@@ -9,6 +9,13 @@ public class TransacaoDeSaqueMediator extends AbstractTransacaoMediator {
 	protected void executaRegrasEspecificas(Transacao transacao) {
 		Conta conta = ContaMediator.get().consultaConta(transacao.getAgencia(),
 				transacao.getConta());
+
+		try {
+			conta.debita(transacao.getValor());
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+
 		ContaMediator.get().atualiza(conta);
 	}
 }
