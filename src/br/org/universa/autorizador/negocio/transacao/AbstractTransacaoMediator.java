@@ -16,10 +16,16 @@ public abstract class AbstractTransacaoMediator {
 
 		// TODO Irá executar várias coisas comuns;
 		try {
-			if (transacao.getValor() <= 0) {
+
+			if (!transacao.validaDados()) {
 				throw new RuntimeException(
 						Mensagens.DADOS_INSUFICIENTES_REALIZAR_TRANSACAO);
 			}
+
+//			if (transacao.getValor() <= 0) {
+//				throw new RuntimeException(
+//						Mensagens.DADOS_INSUFICIENTES_REALIZAR_TRANSACAO);
+//			}
 
 			Conta conta = ContaMediator.get().consultaConta(
 					transacao.getAgencia(), transacao.getConta());
