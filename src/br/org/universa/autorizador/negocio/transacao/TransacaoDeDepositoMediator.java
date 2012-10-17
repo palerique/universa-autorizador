@@ -13,6 +13,10 @@ public class TransacaoDeDepositoMediator extends AbstractTransacaoMediator {
 
 		conta.credita(transacao.getValor());
 
+		conta.adicionaLancamentoDaConta(new LancamentoDaConta(transacao
+				.getTipoDaTransacao().getTipoDoLancamento(), transacao
+				.getTipoDaTransacao().getValor(), transacao.getValor()));
+
 		ContaMediator.get().atualiza(conta);
 	}
 }

@@ -45,6 +45,6 @@ public abstract class AbstractTransacaoMediator {
 		return autorizacao;
 	}
 
-	protected abstract void executaRegrasEspecificas(Transacao transacao);
+	protected abstract void executaRegrasEspecificas(Transacao transacao) throws Exception;
 
 }
