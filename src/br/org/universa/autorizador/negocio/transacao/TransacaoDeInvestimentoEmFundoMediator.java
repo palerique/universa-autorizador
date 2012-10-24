@@ -2,10 +2,8 @@ package br.org.universa.autorizador.negocio.transacao;
 
 import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
+import br.org.universa.autorizador.negocio.conta.TipoDoLancamento;
 import br.org.universa.autorizador.negocio.fundos.FundoDeInvestimentoMediator;
-import br.org.universa.autorizador.negocio.transacao.AbstractTransacaoMediator;
-import br.org.universa.autorizador.negocio.transacao.Transacao;
-import br.org.universa.autorizador.negocio.transacao.TransacaoDeInvestimentoEmFundo;
 
 public class TransacaoDeInvestimentoEmFundoMediator extends
 		AbstractTransacaoMediator {
@@ -24,10 +22,17 @@ public class TransacaoDeInvestimentoEmFundoMediator extends
 				.calculaRentabilidade(
 						transacaoDeInvestimentoEmFundo.getTipoDoFundo(),
 						transacao.getValor());
-		
+
 		conta.credita(transacao.getValor() + rentabilidadeLiquida);
 
 		// gera lancamento na conta
+
+		ContaMediator.get().geraLancamentoEmConta(
+				conta,
+				TipoDoLancamento.CREDITO,
+				"Investimento em fundo - "
+						+ transacaoDeInvestimentoEmFundo.getTipoDoFundo()
+								.getValor(), transacao.getValor());
 
 		ContaMediator.get().atualiza(conta);
 

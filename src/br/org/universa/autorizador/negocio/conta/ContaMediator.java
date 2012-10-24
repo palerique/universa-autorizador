@@ -33,4 +33,12 @@ public class ContaMediator {
 		ContaDAO.get().atualiza(conta);
 	}
 
+	public void geraLancamentoEmConta(Conta conta, TipoDoLancamento tipo,
+			String descricao, double valor) {
+		LancamentoDaConta lancamentoDaConta = new LancamentoDaConta(tipo,
+				descricao, valor);
+		conta.adicionaLancamentoDaConta(lancamentoDaConta);
+
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.org.universa.autorizador.negocio.conta.Conta;
+import br.org.universa.autorizador.negocio.conta.ContaMediator;
 import br.org.universa.autorizador.persistencia.dao.TransacaoDAO;
 
 public class TransacaoMediator {
@@ -43,11 +44,9 @@ public class TransacaoMediator {
 	}
 
 	public void insereTransacaoDaConta(Transacao transacao) throws Exception {
-		// Conta conta =
-		// ContaMediator.get().consultaConta(transacao.getAgencia(),
-		// transacao.getConta());
-		//
-		// TransacaoDAO.get().insere(conta, transacao);
-		throw new Exception("Metódo não implementado");
+		Conta conta = ContaMediator.get().consultaConta(transacao.getAgencia(),
+				transacao.getConta());
+
+		TransacaoDAO.get().insere(conta, transacao);
 	}
 }

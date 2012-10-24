@@ -6,6 +6,8 @@ import br.org.universa.autorizador.negocio.comum.Mensagens;
 import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
 import br.org.universa.autorizador.negocio.conta.LancamentoDaConta;
+import br.org.universa.autorizador.negocio.conta.TipoDoLancamento;
+import br.org.universa.autorizador.negocio.tarifacao.TarifacaoMediator;
 
 public abstract class AbstractTransacaoMediator {
 
@@ -14,7 +16,6 @@ public abstract class AbstractTransacaoMediator {
 		Autorizacao autorizacao = new Autorizacao();
 		autorizacao.setEstado(EstadoDaAutorizacao.AUTORIZADA);
 
-		// TODO Irá executar várias coisas comuns;
 		try {
 
 			if (!transacao.validaDados()) {
@@ -22,21 +23,14 @@ public abstract class AbstractTransacaoMediator {
 						Mensagens.DADOS_INSUFICIENTES_REALIZAR_TRANSACAO);
 			}
 
-//			if (transacao.getValor() <= 0) {
-//				throw new RuntimeException(
-//						Mensagens.DADOS_INSUFICIENTES_REALIZAR_TRANSACAO);
-//			}
-
 			Conta conta = ContaMediator.get().consultaConta(
 					transacao.getAgencia(), transacao.getConta());
 
-			LancamentoDaConta lancamentoDaConta = new LancamentoDaConta(
-					transacao.getTipoDaTransacao().getTipoDoLancamento(),
-					transacao.getTipoDaTransacao().getValor(),
-					transacao.getValor());
-			conta.adicionaLancamentoDaConta(lancamentoDaConta);
-
 			executaRegrasEspecificas(transacao);
+
+			verificaSeHaTarifacao(transacao, conta);
+			
+			TransacaoMediator.get().insereTransacaoDaConta(transacao);
 		} catch (Exception e) {
 			autorizacao.setEstado(EstadoDaAutorizacao.NEGADA);
 			autorizacao.setMotivoDaNegacao(e.getMessage());
@@ -45,6 +39,25 @@ public abstract class AbstractTransacaoMediator {
 		return autorizacao;
 	}
 
-	protected abstract void executaRegrasEspecificas(Transacao transacao) throws Exception;
+	private void verificaSeHaTarifacao(Transacao transacao, Conta conta)
+			throws Exception {
+		double tarifa = TarifacaoMediator.get().tarifa(transacao);
+
+		if (tarifa > 0.0) {
+			conta.debita(tarifa);
+
+			ContaMediator.get().geraLancamentoEmConta(
+					conta,
+					TipoDoLancamento.DEBITO,
+					"Tarifação - "
+							+ transacao.getTipoDaTransacao().getValor(),
+					tarifa);
+
+			ContaMediator.get().atualiza(conta);
+		}
+	}
+
+	protected abstract void executaRegrasEspecificas(Transacao transacao)
+			throws Exception;
 
 }
