@@ -30,9 +30,9 @@ public class TransacaoDeInvestimentoEmFundoMediator extends
 		ContaMediator.get().geraLancamentoEmConta(
 				conta,
 				TipoDoLancamento.CREDITO,
-				"Investimento em fundo - "
+				"Investimento em Fundo "
 						+ transacaoDeInvestimentoEmFundo.getTipoDoFundo()
-								.getValor(), transacao.getValor());
+								.getValor(), rentabilidadeLiquida);
 
 		ContaMediator.get().atualiza(conta);
 
