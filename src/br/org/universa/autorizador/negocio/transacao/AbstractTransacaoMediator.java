@@ -5,9 +5,9 @@ import br.org.universa.autorizador.negocio.autorizacao.EstadoDaAutorizacao;
 import br.org.universa.autorizador.negocio.comum.Mensagens;
 import br.org.universa.autorizador.negocio.conta.Conta;
 import br.org.universa.autorizador.negocio.conta.ContaMediator;
-import br.org.universa.autorizador.negocio.conta.LancamentoDaConta;
 import br.org.universa.autorizador.negocio.conta.TipoDoLancamento;
 import br.org.universa.autorizador.negocio.tarifacao.TarifacaoMediator;
+import br.org.universa.autorizador.servico.SPBAdapter;
 
 public abstract class AbstractTransacaoMediator {
 
@@ -27,9 +27,11 @@ public abstract class AbstractTransacaoMediator {
 					transacao.getAgencia(), transacao.getConta());
 
 			executaRegrasEspecificas(transacao);
+			
+			SPBAdapter.get().notificaTransacao(transacao);
 
 			verificaSeHaTarifacao(transacao, conta);
-			
+
 			TransacaoMediator.get().insereTransacaoDaConta(transacao);
 		} catch (Exception e) {
 			autorizacao.setEstado(EstadoDaAutorizacao.NEGADA);
@@ -46,11 +48,9 @@ public abstract class AbstractTransacaoMediator {
 		if (tarifa > 0.0) {
 			conta.debita(tarifa);
 
-			ContaMediator.get().geraLancamentoEmConta(
-					conta,
+			ContaMediator.get().geraLancamentoEmConta(conta,
 					TipoDoLancamento.DEBITO,
-					"Tarifação - "
-							+ transacao.getTipoDaTransacao().getValor(),
+					"Tarifação - " + transacao.getTipoDaTransacao().getValor(),
 					tarifa);
 
 			ContaMediator.get().atualiza(conta);
